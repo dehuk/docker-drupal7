@@ -7,6 +7,7 @@ RUN set -ex \
 		libjpeg62-turbo-dev \
 		libpng12-dev \
 		libpq-dev \
+		mysql-client \
 	' \
 	&& apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd \
