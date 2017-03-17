@@ -7,7 +7,6 @@ RUN set -ex \
 		libjpeg62-turbo-dev \
 		libpng12-dev \
 		libpq-dev \
-		mysql-client \
 	' \
 	&& apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd \
@@ -18,6 +17,8 @@ RUN set -ex \
 		libjpeg62-turbo \
 		libpq5 \
 	&& apt-get purge -y --auto-remove $buildDeps
+
+RUN apt-get update && apt-get install mysql-client
 
 RUN php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush \
     && chmod +x drush \
