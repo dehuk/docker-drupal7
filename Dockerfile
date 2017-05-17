@@ -12,7 +12,7 @@ RUN set -ex \
 	&& docker-php-ext-configure gd \
 		--with-jpeg-dir=/usr \
 		--with-png-dir=/usr \
-	&& docker-php-ext-install -j "$(nproc)" gd mbstring pdo pdo_mysql pdo_pgsql zip \
+	&& docker-php-ext-install -j "$(nproc)" gd mbstring pdo pdo_mysql pdo_pgsql calendar zip \
 	&& apt-mark manual \
 		libjpeg62-turbo \
 		libpq5 \
