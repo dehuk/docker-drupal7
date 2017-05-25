@@ -2,6 +2,9 @@ FROM php:5.6.30-apache
 
 RUN a2enmod rewrite
 
+# Memory Limit
+RUN echo "memory_limit=512M" > $PHP_INI_DIR/conf.d/memory-limit.ini
+
 RUN set -ex \
 	&& buildDeps=' \
 		libjpeg62-turbo-dev \
