@@ -10,20 +10,21 @@ RUN set -ex \
 		libjpeg62-turbo-dev \
 		libpng12-dev \
 		libpq-dev \
-		zlib1g-dev \
-		libicu-dev \
-		g++ \
 	' \
 	&& apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd \
 		--with-jpeg-dir=/usr \
 		--with-png-dir=/usr \
-    && docker-php-ext-configure intl \
-	&& docker-php-ext-install -j "$(nproc)" gd intl mbstring pdo pdo_mysql pdo_pgsql calendar zip \
+	&& docker-php-ext-install -j "$(nproc)" gd mbstring pdo pdo_mysql pdo_pgsql calendar zip \
 	&& apt-mark manual \
 		libjpeg62-turbo \
 		libpq5 \
 	&& apt-get purge -y --auto-remove $buildDeps
+
+RUN apt-get update \
+	&& apt-get install -y libicu-dev \
+	&& docker-php-ext-configure intl \
+	&& docker-php-ext-install intl
 
 RUN apt-get update && apt-get install -y mysql-client
 
